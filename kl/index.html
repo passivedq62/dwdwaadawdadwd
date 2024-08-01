@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuk.lol/kl</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; 
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.redd.it/m6ptifyhde321.gif'); 
+             background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            cursor: url('https://cur.cursors-4u.net/others/oth-8/oth702.cur') 8 8, auto; /
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; 
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px #fff;
+            background-image: url('https://images-ext-1.discordapp.net/external/rQE8a9PVapRnik4O1YlszvCXx8i24-19BME6leXg24w/https/s6.ezgif.com/tmp/ezgif-6-8a3c321025.gif?width=169&height=300'); 
+            background-size: cover;
+            background-position: center;
+        }
+        .username {
+            font-family: 'TFF', sans-serif; 
+            font-size: 24px;
+            color: #fff;
+            margin: 10px 0;
+            text-shadow: 0 0 10px #fff;
+        }
+        .quote {
+            font-size: 18px;
+            color: #fff;
+            margin: 10px 0;
+            font-style: italic;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .quote::after {
+            content: '|';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #fff;
+            animation: blink 0.75s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { color: transparent; }
+            50% { color: #fff; }
+        }
+        .icons {
+            margin-top: 20px;
+        }
+        .icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .icons img {
+            width: 40px; 
+            height: 40px; 
+            object-fit: contain; 
+        }
+        .falling-knife {
+            position: absolute;
+            width: 50px; 
+            height: 50px; 
+            background-image: url('https://cdn.discordapp.com/emojis/1254796272687255572.gif?size=96&quality=lossless'); 
+            background-size: cover;
+            background-position: center;
+            animation: fall 5s infinite linear;
+        }
+        @keyframes fall {
+            0% {
+                top: -10%;
+                left: calc(100% * var(--random-position));
+            }
+            100% {
+                top: 110%;
+                left: calc(100% * var(--random-position));
+            }
+        }
+    </style>
+</head>
+<body>
+     <audio id="background-audio" src="kl.mp3" autoplay loop></audio>
+    <div class="container">
+        <div class="profile-pic"></div>
+        <div class="username">kl</div>
+        <div class="quote" id="quote">Learn Stuff Your Vulnerable to and there u go .</div>
+        <div class="icons">
+            <a href="https://discord.com/your-discord-link" target="_blank">
+                <img src="https://logos-world.net/wp-content/uploads/2020/12/Discord-Logo.png" alt="Discord">
+            </a>
+            <a href="https://t.me/icmppacket" target="_blank">
+                <img src="https://static.vecteezy.com/system/resources/previews/018/930/708/large_2x/telegram-logo-telegram-icon-transparent-free-png.png" alt="Telegram">
+            </a>
+        </div>
+    </div>
+    <script>
+        // JavaScript for typing effect
+        const quoteElement = document.getElementById('quote');
+        const text = "Learn Stuff Your Vulnerable to and there u go .";
+        let index = 0;
+        let isDeleting = false;
+        let speed = 100; 
+
+        function type() {
+            if (isDeleting) {
+                quoteElement.textContent = text.substring(0, index--);
+                if (index < 0) {
+                    isDeleting = false;
+                    setTimeout(type, 500); 
+                } else {
+                    setTimeout(type, speed);
+                }
+            } else {
+                quoteElement.textContent = text.substring(0, index++);
+                if (index > text.length) {
+                    isDeleting = true;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, speed);
+                }
+            }
+        }
+
+        type(); 
+
+        
+        function createKnife() {
+            const knife = document.createElement('div');
+            knife.className = 'falling-knife';
+            document.body.appendChild(knife);
+
+            // Randomize initial position
+            const randomPosition = Math.random();
+            knife.style.setProperty('--random-position', randomPosition);
+
+            
+            knife.addEventListener('animationend', () => {
+                knife.remove();
+            });
+        }
+
+        
+        setInterval(createKnife, 2000); 
+    </script>
+</body>
+</html>
