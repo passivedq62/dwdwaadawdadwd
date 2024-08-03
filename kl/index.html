@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuk.lol/kl</title>
-    <link rel="icon" href="https://images-ext-1.discordapp.net/external/rQE8a9PVapRnik4O1YlszvCXx8i24-19BME6leXg24w/https/s6.ezgif.com/tmp/ezgif-6-8a3c321025.gif?width=275&height=488" type="image/x-icon">
+    <title>cuk.lol/kl</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000; 
+            background-color: #000;
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: url('https://i.redd.it/m6ptifyhde321.gif'); 
-             background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed; 
-            cursor: url('https://cur.cursors-4u.net/others/oth-8/oth702.cur') 8 8, auto; /
+            overflow: hidden; /* Prevents scrolling */
+            cursor: url('https://cur.cursors-4u.net/others/oth-8/oth702.cur') 8 8, auto;
         }
         .container {
             display: flex;
@@ -25,7 +21,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            position: relative; 
+            position: relative;
+            z-index: 1; /* Ensures content appears above the video */
         }
         .profile-pic {
             width: 150px;
@@ -33,12 +30,12 @@
             border-radius: 50%;
             border: 5px solid #fff;
             box-shadow: 0 0 10px #fff;
-            background-image: url('https://media.discordapp.net/attachments/1253724122261753917/1268619612371550269/IMG_5186.png?ex=66ad1595&is=66abc415&hm=cccd552271801b127146aec1c9fbb1953073aa3af86a8a248d83b5747e38cb7b&=&format=webp&quality=lossless&width=553&height=488'); 
+            background-image: url('males.png');
             background-size: cover;
             background-position: center;
         }
         .username {
-            font-family: 'TFF', sans-serif; 
+            font-family: 'TFF', sans-serif;
             font-size: 24px;
             color: #fff;
             margin: 10px 0;
@@ -74,18 +71,19 @@
             margin: 0 10px;
         }
         .icons img {
-            width: 40px; 
-            height: 40px; 
-            object-fit: contain; 
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
         .falling-knife {
             position: absolute;
-            width: 50px; 
-            height: 50px; 
-            background-image: url('https://cdn.discordapp.com/emojis/1254796272687255572.gif?size=96&quality=lossless'); 
+            width: 50px;
+            height: 50px;
+            background-image: url('https://cdn.discordapp.com/emojis/1254796272687255572.gif?size=96&quality=lossless');
             background-size: cover;
             background-position: center;
             animation: fall 5s infinite linear;
+            z-index: 2; /* Ensures knives appear above the video */
         }
         @keyframes fall {
             0% {
@@ -97,10 +95,23 @@
                 left: calc(100% * var(--random-position));
             }
         }
+        video#background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0; /* Ensures video is the background */
+        }
     </style>
 </head>
 <body>
-     <audio id="background-audio" src="kl.mp3" autoplay loop></audio>
+    <video id="background-video" autoplay loop muted>
+        <source src="kl.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+     <audio id="background-audio" src="kls.mp3" autoplay loop></audio>
     <div class="container">
         <div class="profile-pic"></div>
         <div class="username">kl</div>
@@ -144,7 +155,6 @@
 
         type(); 
 
-        
         function createKnife() {
             const knife = document.createElement('div');
             knife.className = 'falling-knife';
@@ -154,14 +164,12 @@
             const randomPosition = Math.random();
             knife.style.setProperty('--random-position', randomPosition);
 
-            
             knife.addEventListener('animationend', () => {
                 knife.remove();
             });
         }
 
-        
-        setInterval(createKnife, 2000); 
+        setInterval(createKnife, 2000);
     </script>
 </body>
 </html>
